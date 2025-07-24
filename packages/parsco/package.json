@@ -1,7 +1,7 @@
 {
   "name": "parsco",
   "version": "0.0.1",
-  "private": true,
+  "description": "A TypeScript library for building powerful, composable parsers using the parser combinator pattern. Parsco provides small, reusable parsing tools that can be combined to create complex grammars and interpreters, all without separate tokenization or external parser generators.",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -17,5 +17,43 @@
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agroupp/parsco.git"
+  },
+  "bugs": {
+    "url": "https://github.com/agroupp/parsco/issues"
+  },
+  "author": {
+    "name": "Arthur Groupp",
+    "email": "arth.groupp@gmail.com"
+  },
+  "readme": "https://github.com/agroupp/parsco/blob/master/packages/parsco/README.md",
+  "keywords": [
+    "parser",
+    "parsing",
+    "parser combinator",
+    "combinator",
+    "typescript",
+    "grammar",
+    "syntax",
+    "recursive descent",
+    "functional",
+    "contextual parsing",
+    "text processing",
+    "DSL",
+    "interpreter",
+    "sequence",
+    "choice",
+    "lazy",
+    "many",
+    "between",
+    "regex",
+    "tokenization"
+  ]
 }

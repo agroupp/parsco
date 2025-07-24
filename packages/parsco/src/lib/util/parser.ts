@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { parserError, updateParserState } from "./update-parser-state.js";
+import { parserError, updateParserState } from './update-parser-state.js';
 
 /**
  * Represents the status of a parser operation.
@@ -15,7 +15,7 @@ export interface ParserState<T> {
   /**
    * The input string being parsed.
    */
-  target: string; 
+  target: string;
   /**
    * The current position in the input string.
    */
@@ -85,6 +85,32 @@ export class Parser<T> {
       }
 
       return updateParserState<T, U>(nextState, callbackfn(nextState.result));
+    };
+
+    return createParser(transformerFn);
+  }
+
+  /**
+   * Parses the next value based on the result of parsing of the current one (contextual parsing).
+   *
+   * @example
+   * For 'string:something' will return 'something' as a string. For 'number:42' will return 42 as a number.
+   * @param callbackfn
+   */
+  chain<A>(callbackfn: (result: T) => Parser<A>): Parser<A>;
+  chain<A, B>(callbackfn: (result: T) => Parser<A> | Parser<B>): Parser<A | B>;
+  chain<A, B, C>(callbackfn: (result: T) => Parser<A> | Parser<B> | Parser<C>): Parser<A | B | C>;
+  chain(callbackfn: (result: T) => Parser<any>): Parser<any> {
+    const transformerFn: TransformerFn<T, any> = state => {
+      const nextState = this.transformerFn(state);
+
+      if (nextState.status === 'error' || !nextState.result) {
+        return nextState;
+      }
+
+      const nextParser = callbackfn(nextState.result);
+
+      return nextParser.transformerFn(nextState);
     };
 
     return createParser(transformerFn);

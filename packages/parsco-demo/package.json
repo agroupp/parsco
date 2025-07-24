@@ -16,9 +16,12 @@
     }
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "parsco": "0.0.1"
   },
   "scripts": {
-    "serve": "tsx watch ./src/index.ts"
+    "serve": "tsx watch ./src/index.ts",
+    "contextual": "tsx ./src/contextual-parsing.ts",
+    "recursive": "tsx ./src/recursive-parsing.ts"
   }
 }

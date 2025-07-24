@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ParserState } from "./parser.js";
+import { ParserState } from './parser.js';
 
 /**
  * Updates the parser state to reflect a successful parsing operation.

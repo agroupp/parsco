@@ -56,5 +56,8 @@
     "test": {
       "dependsOn": ["^build"]
     }
+  },
+  "release": {
+    "projects": ["parsco"]
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "parsco",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A TypeScript library for building powerful, composable parsers using the parser combinator pattern. Parsco provides small, reusable parsing tools that can be combined to create complex grammars and interpreters, all without separate tokenization or external parser generators.",
   "type": "module",
   "main": "./dist/index.js",

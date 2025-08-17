@@ -44,6 +44,10 @@ export function sequenceOf(parsers: Parser<any>[]): Parser<any> {
       }
     }
 
+    if (nextState.status === 'error') {
+      return nextState;
+    }
+
     return updateParserState(nextState, results);
   });
 }

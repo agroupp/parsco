@@ -9,3 +9,7 @@ To build the library use:
 ```sh
 npx nx build parsco
 ```
+
+## Gratitude & Inspiration
+
+Special thanks to [Low Byte Productions](https://youtube.com/@lowbyteproductions?si=g-tzwy0UUqHRNU-b) for his inspiring content on parser combinators and functional programming. His videos provided valuable insights and motivation for this project.

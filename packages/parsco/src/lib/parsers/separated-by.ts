@@ -37,6 +37,10 @@ export function separatedBy<S, T>(
 ): (valueParser: Parser<T>) => Parser<T[]> {
   return (valueParser: Parser<T>) =>
     createParser<T, T[]>(state => {
+      if (state.status === 'error') {
+        return state;
+      }
+
       const results: T[] = [];
       let nextState: ParserState<T | S> = state;
 

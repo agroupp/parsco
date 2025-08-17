@@ -42,21 +42,27 @@ console.log(result); // { status: 'success', result: ['abc', '123'], ... }
 ```typescript
 import { letters, digits, sequenceOf, str } from 'parsco';
 
-const stringParser = letters().map(res => ({ type: 'string', value: res }));
-const numberParser = digits().map(res => ({ type: 'number', value: parseInt(res) }));
+const stringParser = letters().map((res) => ({ type: 'string', value: res }));
+const numberParser = digits().map((res) => ({
+  type: 'number',
+  value: parseInt(res),
+}));
 
 const parserWithChain = sequenceOf([letters(), str(':')])
-  .map(res => res[0])
-  .chain(type => {
+  .map((res) => res[0])
+  .chain((type) => {
     switch (type) {
-      case 'string': return stringParser;
-      case 'number': return numberParser;
-      default: throw new Error(`Unknown type: ${type}`);
+      case 'string':
+        return stringParser;
+      case 'number':
+        return numberParser;
+      default:
+        throw new Error(`Unknown type: ${type}`);
     }
   });
 
 console.log(parserWithChain.run('string:something')); // { type: 'string', value: 'something' }
-console.log(parserWithChain.run('number:42'));        // { type: 'number', value: 42 }
+console.log(parserWithChain.run('number:42')); // { type: 'number', value: 42 }
 ```
 
 ## Example: Recursive Parsing
@@ -65,14 +71,18 @@ console.log(parserWithChain.run('number:42'));        // { type: 'number', value
 import { between, choice, digits, lazy, sequenceOf, str } from 'parsco';
 
 // Arithmetic expression parser: (+ (* 10 2) (- 10 2))
-const numberParser = digits().map(d => ({ type: 'number', value: Number(d) }));
+const numberParser = digits().map((d) => ({
+  type: 'number',
+  value: Number(d),
+}));
 const operatorParser = choice([str('+'), str('-'), str('*'), str('/')]);
 const expr = lazy(() => choice([numberParser, operationParser]));
-const operationParser = between(str('('), str(')'))(
-  sequenceOf([operatorParser, str(' '), expr, str(' '), expr])
-).map(res => ({
+const operationParser = between(
+  str('('),
+  str(')')
+)(sequenceOf([operatorParser, str(' '), expr, str(' '), expr])).map((res) => ({
   type: 'operation',
-  value: { op: res[0], a: res[2], b: res[4] }
+  value: { op: res[0], a: res[2], b: res[4] },
 }));
 
 const src = '(+ (* 10 2) (- (/ 50 3) 2))';
@@ -100,6 +110,10 @@ See the [parser-combinators.md](../../parser-combinators.md) for a conceptual in
 nx build parsco
 nx test parsco
 ```
+
+## Gratitude & Inspiration
+
+Special thanks to [Low Byte Productions](https://youtube.com/@lowbyteproductions?si=g-tzwy0UUqHRNU-b) for his inspiring content on parser combinators and functional programming. His videos provided valuable insights and motivation for this project.
 
 ## License
 

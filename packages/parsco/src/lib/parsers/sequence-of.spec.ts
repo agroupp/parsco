@@ -29,19 +29,20 @@ describe('sequenceOf', () => {
 
   it('should return partial result for partially correct target', () => {
     expect(parser.run(PARTIALLY_CORRECT_TARGET)).toEqual({
-      ...EXPECTED_CORRECT_VALUE,
-      result: [SRC_STR_1],
+      result: SRC_STR_1,
       index: SRC_STR_1.length,
       target: PARTIALLY_CORRECT_TARGET,
+      status: 'error',
+      errorMessage: 'str: Failed to match the "SRC_STR_2", but recieved "SRC_STR_1!"',
     });
   });
 
   it('should return empty result for incorrect target', () => {
     expect(parser.run(INCORRECT_TARGET)).toEqual({
-      ...EXPECTED_CORRECT_VALUE,
-      result: [],
+      status: 'error',
       index: 0,
       target: INCORRECT_TARGET,
+      errorMessage: 'str: Failed to match the "SRC_STR_1", but recieved "INCORRECT_TARGET"',
     });
   });
 });
